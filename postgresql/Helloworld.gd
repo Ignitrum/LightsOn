@@ -24,13 +24,9 @@ func _physics_process(_delta: float) -> void:
 
 
 func _connection_established() -> void:
-	print(database.parameter_status)
+	#print(database.parameter_status)
 	
 	var error := database.execute("""
-		BEGIN;
-		/*Helloworld*/
-		SELECT concat('Hello', 'World');
-		COMMIT;
 	""")
 	
 	print(error)

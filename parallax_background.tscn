@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7y5wyqalm73m"]
+
+[ext_resource type="Texture2D" uid="uid://y8mn8cji7l1n" path="res://assets/caverns/caverns-files-web/layers/background.png" id="1_a302d"]
+[ext_resource type="Texture2D" uid="uid://bn23cgdy01670" path="res://assets/caverns/caverns-files-web/layers/back-walls.png" id="2_u4aoo"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+
+[node name="Background" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(576.131, 324.24)
+rotation = 1.5708
+scale = Vector2(3.37244, 3.99859)
+texture = ExtResource("1_a302d")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+
+[node name="Back-walls" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(576, 324)
+scale = Vector2(2.25, 2.25)
+texture = ExtResource("2_u4aoo")

@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgan4j2kfr35p"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_pn74y"]
+[ext_resource type="Script" path="res://Play.gd" id="2_kwhgb"]
+[ext_resource type="PackedScene" uid="uid://37oyiejj266d" path="res://parallax_background1.tscn" id="3_m8px6"]
+[ext_resource type="PackedScene" uid="uid://dengea6sfk4px" path="res://world_1.tscn" id="4_boxep"]
+[ext_resource type="Script" path="res://world_1.gd" id="5_v34o5"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_pn74y")
+
+[node name="Play" type="Button" parent="."]
+offset_left = 441.0
+offset_top = 236.0
+offset_right = 691.0
+offset_bottom = 368.0
+text = "Play"
+script = ExtResource("2_kwhgb")
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 443.0
+offset_top = 422.0
+offset_right = 693.0
+offset_bottom = 554.0
+text = "Quit"
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("3_m8px6")]
+
+[node name="World1" parent="." instance=ExtResource("4_boxep")]
+script = ExtResource("5_v34o5")
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

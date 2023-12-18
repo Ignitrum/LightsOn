@@ -1,0 +1,182 @@
+[gd_scene load_steps=11 format=3 uid="uid://dengea6sfk4px"]
+
+[ext_resource type="PackedScene" uid="uid://vfxkdkvpftet" path="res://character/Player.tscn" id="1_68art"]
+[ext_resource type="PackedScene" uid="uid://b7y5wyqalm73m" path="res://parallax_background.tscn" id="2_401il"]
+[ext_resource type="Texture2D" uid="uid://cohg3v71mjwdg" path="res://assets/New folder/image_0-0.png" id="3_2gcuw"]
+[ext_resource type="Texture2D" uid="uid://bohm6n7vs4rl5" path="res://assets/New folder/image_0-1.png" id="4_gu82r"]
+[ext_resource type="Texture2D" uid="uid://bibmfmdxrruco" path="res://assets/chandelier/image2-removebg-preview.png" id="5_xklhv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wp3t7"]
+size = Vector2(1154.25, 125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1eglq"]
+size = Vector2(63.8413, 404)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ygdby"]
+size = Vector2(85, 77)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy33s"]
+size = Vector2(85, 76.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_neh2w"]
+size = Vector2(65.125, 408)
+
+[node name="World1" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_68art")]
+position = Vector2(136, 488)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(576, 584)
+shape = SubResource("RectangleShape2D_wp3t7")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1120.92, 322)
+shape = SubResource("RectangleShape2D_1eglq")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(756, 286)
+shape = SubResource("RectangleShape2D_ygdby")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(299.5, 286.25)
+shape = SubResource("RectangleShape2D_gy33s")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(31.4375, 324)
+shape = SubResource("RectangleShape2D_neh2w")
+
+[node name="Panel" type="Panel" parent="."]
+offset_top = 520.0
+offset_right = 1152.0
+offset_bottom = 648.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("2_401il")]
+
+[node name="Image0-0" type="Sprite2D" parent="."]
+position = Vector2(47.9297, 560)
+scale = Vector2(2.44872, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-2" type="Sprite2D" parent="."]
+position = Vector2(164, 560)
+scale = Vector2(2.41857, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-3" type="Sprite2D" parent="."]
+position = Vector2(280, 560)
+scale = Vector2(2.44872, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-4" type="Sprite2D" parent="."]
+position = Vector2(397, 560)
+scale = Vector2(2.50605, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-5" type="Sprite2D" parent="."]
+position = Vector2(515, 560)
+scale = Vector2(2.46281, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-8" type="Sprite2D" parent="."]
+position = Vector2(856, 560)
+scale = Vector2(2.41857, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-11" type="Sprite2D" parent="."]
+position = Vector2(744, 560)
+scale = Vector2(2.41857, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-10" type="Sprite2D" parent="."]
+position = Vector2(968, 560)
+scale = Vector2(2.41857, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-9" type="Sprite2D" parent="."]
+position = Vector2(1081.07, 560)
+scale = Vector2(2.44872, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-6" type="Sprite2D" parent="."]
+position = Vector2(630.43, 560)
+scale = Vector2(2.46281, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-12" type="Sprite2D" parent="."]
+position = Vector2(71.9297, 87.0001)
+rotation = 3.14159
+scale = Vector2(2.44872, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-13" type="Sprite2D" parent="."]
+position = Vector2(188, 87)
+rotation = 3.14159
+scale = Vector2(2.41857, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-14" type="Sprite2D" parent="."]
+position = Vector2(304, 87.0003)
+rotation = 3.14159
+scale = Vector2(2.44872, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-15" type="Sprite2D" parent="."]
+position = Vector2(421, 87.0001)
+rotation = 3.14159
+scale = Vector2(2.50605, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-16" type="Sprite2D" parent="."]
+position = Vector2(539, 87.0001)
+rotation = 3.14159
+scale = Vector2(2.46281, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-17" type="Sprite2D" parent="."]
+position = Vector2(880, 87.0001)
+rotation = 3.14159
+scale = Vector2(2.41857, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-18" type="Sprite2D" parent="."]
+position = Vector2(768, 87)
+rotation = 3.14159
+scale = Vector2(2.41857, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-19" type="Sprite2D" parent="."]
+position = Vector2(992, 87.0001)
+rotation = 3.14159
+scale = Vector2(2.41857, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-20" type="Sprite2D" parent="."]
+position = Vector2(1105.07, 87.0001)
+rotation = 3.14159
+scale = Vector2(2.44872, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-21" type="Sprite2D" parent="."]
+position = Vector2(654.43, 87.0001)
+rotation = 3.14159
+scale = Vector2(2.46281, 2.91525)
+texture = ExtResource("3_2gcuw")
+
+[node name="Image0-1" type="Sprite2D" parent="."]
+position = Vector2(304, 272)
+scale = Vector2(1.75352, 1.77119)
+texture = ExtResource("4_gu82r")
+
+[node name="Image0-7" type="Sprite2D" parent="."]
+position = Vector2(760, 272)
+scale = Vector2(1.75352, 1.77119)
+texture = ExtResource("4_gu82r")
+
+[node name="Image2-removebg-preview" type="Sprite2D" parent="."]
+position = Vector2(579, 201)
+scale = Vector2(0.462778, 1.08917)
+texture = ExtResource("5_xklhv")

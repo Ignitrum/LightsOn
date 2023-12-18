@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgiqda6pglsmc"]
+
+[ext_resource type="Texture2D" uid="uid://d3v6fyk0vcy78" path="res://assets/caverns/caverns-files-web/Caverns-preview.jpg" id="1_d4d3m"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+
+[node name="Caverns-preview" type="Sprite2D" parent="."]
+position = Vector2(579, 320.5)
+scale = Vector2(2.23828, 2.21875)
+texture = ExtResource("1_d4d3m")

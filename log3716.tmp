@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://lxb8loxd4ubp"]
+
+[ext_resource type="Script" path="res://login_menu.gd" id="1_ojd4d"]
+
+[node name="login_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -98.0
+offset_right = 2.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ojd4d")
+
+[node name="Email" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_top = 361.0
+offset_right = 127.0
+offset_bottom = 402.0
+grow_horizontal = 2
+placeholder_text = "Enter your Email"
+
+[node name="Password" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.492
+anchor_top = 0.685
+anchor_right = 0.492
+anchor_bottom = 0.685
+offset_left = -131.784
+offset_top = -26.88
+offset_right = 135.216
+offset_bottom = 17.12
+placeholder_text = "Enter your Password"
+
+[node name="Login" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.855
+anchor_right = 0.5
+anchor_bottom = 0.855
+offset_left = -3.0
+offset_top = -78.04
+offset_right = 124.0
+offset_bottom = -47.04
+text = "Login"
+
+[node name="Create" type="Button" parent="."]
+layout_mode = 0
+offset_left = 438.0
+offset_top = 475.0
+offset_right = 551.0
+offset_bottom = 506.0
+text = "Create"
+
+[connection signal="button_down" from="Create" to="." method="_on_create_button_down"]

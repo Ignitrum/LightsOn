@@ -1,26 +1,59 @@
 extends Control
 
 
-var email = ""
+var email
 var password
 
 var exists = false
 
 func _on_create_button_down():
-	if !exists:
+	$Info.text = ""
+	if (!$Email.text == ""):
 		email = $Email.text
+	else:
+		$Info.text = "Can't create account without email address or password"
+	if(!$Password.text == ""):
 		password = $Password.text.sha256_text()
-		exists = true
+	else:
+		$Info.text = "Can't create account without email address or password"
+	makeCreateRequest("email","account","email LIKE '%s'"%[email])
 
 func _on_login_button_down():
-	var data = database.execute("""
-	Select email from account;
-	""")
-	print(data)
+	$Info.text = ""
+	email = $Email.text
+	password = $Password.text.sha256_text()
+	emailLoginRequest("email","account","email LIKE '%s'"%[email])
+	
+func _on_test_pressed():
+	$Info.text = ""
+	password = $Password.text.sha256_text()
+	email = $Email.text
+	database.execute("SELECT 'passwordCheck',EXISTS(SELECT 1 FROM ACCOUNT WHERE email = '%s' AND password = '%s')"% [email,password])
+
+func emailLoginRequest(what: String, from:String, where:String)-> void:
+	#print("SELECT %s FROM %s WHERE %s;" % [what,from,where])
+	database.execute("SELECT 'emailRequest',EXISTS(SELECT %s FROM %s WHERE %s);" % [what,from,where])
+
+func makeCreateRequest(what: String, from:String, where:String)-> void:
+	database.execute("SELECT 'createRequest',EXISTS(SELECT %s FROM %s WHERE %s);" % [what,from,where])
+	
+func _email_valid():
+	database.execute("SELECT 'passwordCheck',EXISTS(SELECT 1 FROM account WHERE email = '%s' AND password = '%s')"% [email,password])
+	
+func _password_valid():
+	get_tree().change_scene_to_file("res://Logged_In.tscn")
+	
+func _invalid():
+	$Info.text = "Email or Password wrong"
+
+func _create_account():
+	password = $Password.text.sha256_text()
+	database.execute("SELECT CONCAT('creatingAccount');")
 	
 
-
-
+func _email_taken():
+	$Info.text = "Email already taken"
+	
 const USER := "postgres"
 const PASSWORD := "1234"
 const HOST := "localhost"
@@ -30,11 +63,7 @@ const DATABASE := "LightsOut" # Database name
 var database: PostgreSQLClient = PostgreSQLClient.new()
 
 func _init():
-	var _error = database.connect("connection_established", Callable(self, "_connection_established"))
-	_error = database.connect("authentication_error", Callable(self, "_authentication_error"))
-	_error = database.connect("connection_closed", Callable(self, "_connection_close"))
-	_error = database.connect("data_received", Callable(self, "_data_received"))
-	
+	var _error = database.connect("data_received", Callable(self, "_data_received"))
 	#Connection to the database
 	_error = database.connect_to_host("postgresql://%s:%s@%s:%d/%s" % [USER, PASSWORD, HOST, PORT, DATABASE])
 
@@ -45,39 +74,41 @@ func _physics_process(_delta: float) -> void:
 
 func _connection_established() -> void:
 	print(database.parameter_status)
-	
-	var error := database.execute("""
-		#BEGIN;
-		#SELECT email from account;
-		#COMMIT;
-	""")
-	
-	print(error)
+	print("Database connected")
 
 
 func _data_received(error_object: Dictionary, transaction_status: PostgreSQLClient.TransactionStatus, datas: Array) -> void:
-	match transaction_status:
-		database.TransactionStatus.NOT_IN_A_TRANSACTION_BLOCK:
-			print("NOT_IN_A_TRANSACTION_BLOCK")
-		database.TransactionStatus.IN_A_TRANSACTION_BLOCK:
-			print("IN_A_TRANSACTION_BLOCK")
-		database.TransactionStatus.IN_A_FAILED_TRANSACTION_BLOCK:
-			print("IN_A_FAILED_TRANSACTION_BLOCK")
+	#match transaction_status:
+	#	database.TransactionStatus.NOT_IN_A_TRANSACTION_BLOCK:
+	#		print("NOT_IN_A_TRANSACTION_BLOCK")
+	#	database.TransactionStatus.IN_A_TRANSACTION_BLOCK:
+	#		print("IN_A_TRANSACTION_BLOCK")
+	#	database.TransactionStatus.IN_A_FAILED_TRANSACTION_BLOCK:
+	#		print("IN_A_FAILED_TRANSACTION_BLOCK")
 	
-	# The datas variable contains an array of PostgreSQLQueryResult object.
 	for data in datas:
-		#Specifies the number of fields in a row (can be zero).
-		#print(data.number_of_fields_in_a_row)
+		#print(data.data_row)
+		if(!data.data_row == []):
+			var result = data.data_row[0]
+			match result[0]:
+				"emailRequest":
+					if(result[1]):
+						_email_valid()
+					else:
+						_invalid()
+				"passwordCheck":
+					if(result[1]):
+						_password_valid()
+					else:
+						_invalid()
+				"createRequest":
+					if(!result[1]):
+						_create_account()
+					else:
+						_email_taken()
+						
 		
-		# This is usually a single word that identifies which SQL command was completed.
-		# note: the "BEGIN" and "COMMIT" commands return empty values
-		print(data.command_tag)
-		
-		print(data.row_description)
-		
-		print(data.data_row)
-		
-		prints("Notice:", data.notice)
+			
 	
 	if not error_object.is_empty():
 		prints("Error:", error_object)
@@ -95,3 +126,20 @@ func _connection_close(clean_closure := true) -> void:
 
 func _exit_tree() -> void:
 	database.close()
+
+
+func _on_check_button_toggled(button_pressed):
+	$Password.secret = !button_pressed
+
+@onready var emailRegex = RegEx.new()
+@onready var passwordRegex = RegEx.new()
+
+func _on_ready():
+	emailRegex.compile("[^a-zA-Z0-9@.]")
+	passwordRegex.compile("[^a-zA-Z0-9!?.:-_]")
+
+func _on_email_text_changed(new_text):
+	var cached_caret = $Email.caret_column
+	if emailRegex.search(new_text):
+		$Email.text = emailRegex.sub($Email.text, "", true)
+		$Email.caret_column = cached_caret

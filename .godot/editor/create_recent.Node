@@ -1,6 +1,9 @@
+Label
+CheckButton
+LineEdit
+Control
+Node2D
 Button
 TextEdit
-Control
 MenuButton
 VBoxContainer
-Node2D

@@ -1,10 +1,3 @@
-res://main.tscn
-res://login_menu.gd
-res://world_1.tscn
-res://character/Player.tscn
-res://parallax_background1.tscn
-res://parallax_background3.tscn
-res://parallax_background.tscn
 res://login_menu.tscn
-res://postgresql/pgsimp.gd
-res://postgresql/Helloworld.gd
+res://login_menu.gd
+res://Logged_In.tscn
